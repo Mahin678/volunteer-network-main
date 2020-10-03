@@ -15,6 +15,7 @@ import Error from './Component/Error/Error';
 import Register from './Component/Register/Register';
 import PrivateRoute from './Component/PrivateRoute/PrivateRoute';
 import { useState } from 'react';
+import ShowUserPersonalInfo from './Component/ShowUserPersonalInfo/ShowUserPersonalInfo';
 
 export const UserContext = createContext();
 
@@ -24,17 +25,27 @@ function App() {
     userEmail: "",
     issuDate: "",
     massage: "",
-    catagory: "",
+    category: "",
     descriptions: "",
     isAdmin: false,
   })
+  const [allEventsInfo, setAllEventsInfo] = useState([])
   return (
-    <UserContext.Provider value={{ userInfo: [users, setUser] }}>
+    <UserContext.Provider value={{ userInfo: [users, setUser], eventInfo: [allEventsInfo, setAllEventsInfo] }}>
       <div className="App-wrapper">
         <Router>
           <Switch>
+            <Route path="/home" >
+              <Header />
+            </Route>
+            <PrivateRoute path="/event" >
+              <ShowUserPersonalInfo />
+            </PrivateRoute>
             <Route path="/login" >
               <GoogleSignIn />
+            </Route>
+            <Route path="/userAllTask" >
+              <ShowUserPersonalInfo />
             </Route>
             <PrivateRoute path="/register/:id" >
               <Register />

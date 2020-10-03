@@ -1,0 +1,29 @@
+
+.userInfo-header{
+    height:100vh;
+    background-color:#F8FAFC;
+    text-transform: capitalize;
+}
+.user-data img{
+    border-radius: 300px;
+    width:130px;
+    height: 130px;
+    
+}
+.user-data h4{
+    color:darkgray;
+}
+.task-wrapper img{
+    width:180px;
+    height:180px;
+    border-radius:20px;
+}
+.userInfo-border{
+    border-bottom:2px solid darkgray;
+}
+.task-wrapper{
+    /* width: 450px;
+    height: 180px ; */
+    border-radius: 16px;
+    background-color: white;
+}

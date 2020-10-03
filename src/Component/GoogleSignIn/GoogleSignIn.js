@@ -22,10 +22,11 @@ const GoogleSignIn = () => {
         firebase.auth().signInWithPopup(provider).then(function (result) {
             var token = result.credential.accessToken;
             var user = result.user;
-            const { displayName, email } = user;
+            const { displayName, email, photoURL } = user;
             const newUser = { ...users }
             newUser.UserName = displayName;
             newUser.userEmail = email;
+            newUser.photoURL = photoURL;
             setUser(newUser);
             history.replace(from)
         }).catch(function (error) {

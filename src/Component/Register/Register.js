@@ -1,14 +1,18 @@
-import React, { useContext, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { UserContext } from '../../App';
-import { FakeData } from '../../FakeData/FakeData';
 import './Register.css'
 const Register = () => {
     const { id } = useParams();
-    const GetplaceInfo = FakeData.find(data => data.id == id)
-    const { userInfo } = useContext(UserContext)
+    const { userInfo, eventInfo } = useContext(UserContext)
     const [users, setUser] = userInfo;
-
+    const [events, setEvent] = useState([])
+    let history = useHistory();
+    useEffect(() => {
+        fetch('http://localhost:4000/getEvent/' + id)
+            .then(res => res.json())
+            .then(data => setEvent(data))
+    }, [id])
     const [inputValue, setInputValue] = useState({
         date: "",
         Descriptions: "",
@@ -28,13 +32,23 @@ const Register = () => {
     const HandleSubmitInfo = (e) => {
         const newUserDetails = { ...users }
         newUserDetails.issuDate = inputValue.date;
-        newUserDetails.catagory = GetplaceInfo.placeName;
+        newUserDetails.category = events.placeName;
         newUserDetails.descriptions = inputValue.Descriptions;
+        newUserDetails.categoryImg = events.img;
         setUser(newUserDetails)
+        fetch('http://localhost:4000/addVolunteer', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newUserDetails),
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result) {
+                    history.push('/userAllTask')
+                }
+            })
         e.preventDefault();
     }
-
-    console.log(users);
     return (
         <div className="register-wrapper container" >
 
@@ -50,7 +64,7 @@ const Register = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="">Date</label>
-                    <input onBlur={handleOnchangeValue} name="date" type="date" className="form-control" />
+                    <input required onBlur={handleOnchangeValue} name="date" type="date" className="form-control" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="Descriptions">Descriptions</label>
@@ -58,14 +72,13 @@ const Register = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="Organization">Organization books at the library</label>
-                    <input value={GetplaceInfo.placeName} type="text" className="form-control" />
+                    <input value={events.placeName} type="text" className="form-control" />
                 </div>
 
                 <div className="form-group form-check">
                     <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                     <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
                 </div>
-
                 <button type="submit" className="btn btn-primary">Register</button>
             </form>
         </div>

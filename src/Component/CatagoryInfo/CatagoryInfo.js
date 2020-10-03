@@ -12,7 +12,6 @@ const CatagoryInfo = ({ data }) => {
                     </div>
                 </div>
             </Link>
-
         </div>
     );
 };

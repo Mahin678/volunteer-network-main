@@ -1,9 +1,17 @@
-import React from 'react';
-import { FakeData } from '../../FakeData/FakeData';
+import React, { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../App';
 import CategoryInfo from '../CatagoryInfo/CatagoryInfo';
 import Topbar from '../Topbar/Topbar';
 import './Header.css'
 const Header = () => {
+
+    const { eventInfo } = useContext(UserContext)
+    const [allEventsInfo, setAllEventsInfo] = eventInfo;
+    useEffect(() => {
+        fetch('http://localhost:4000/getVolunteerData')
+            .then(res => res.json())
+            .then(data => setAllEventsInfo(data))
+    }, [])
     return (
         <div className="header-wrapper" >
             <div>
@@ -21,7 +29,7 @@ const Header = () => {
             </div>
             <div className="row container mx-auto mt-5 " >
                 {
-                    FakeData.map(info => <CategoryInfo data={info} ></CategoryInfo>)
+                    allEventsInfo.map(info => <CategoryInfo data={info} ></CategoryInfo>)
                 }
             </div>
         </div>
