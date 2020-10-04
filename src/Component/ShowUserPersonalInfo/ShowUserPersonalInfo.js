@@ -7,13 +7,13 @@ const ShowUserPersonalInfo = () => {
     const [users, setUser] = userInfo;
     const [previousInfo, setPreviousInfo] = useState([])
     useEffect(() => {
-        fetch('http://localhost:4000/getUserTasks?userEmail=' + users.userEmail)
+        fetch('https://dry-bayou-78136.herokuapp.com/getUserTasks?userEmail=' + users.userEmail)
             .then(res => res.json())
             .then(result => setPreviousInfo(result))
     }, [previousInfo]
     )
     const handaleCancel = (id) => {
-        fetch(`http://localhost:4000/CancelEvents/${id}`, {
+        fetch(`https://dry-bayou-78136.herokuapp.com/CancelEvents/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

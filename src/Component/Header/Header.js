@@ -8,7 +8,7 @@ const Header = () => {
     const { eventInfo } = useContext(UserContext)
     const [allEventsInfo, setAllEventsInfo] = eventInfo;
     useEffect(() => {
-        fetch('http://localhost:4000/getVolunteerData')
+        fetch('https://dry-bayou-78136.herokuapp.com/getVolunteerData')
             .then(res => res.json())
             .then(data => setAllEventsInfo(data))
     }, [])

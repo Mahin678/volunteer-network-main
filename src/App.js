@@ -17,6 +17,9 @@ import PrivateRoute from './Component/PrivateRoute/PrivateRoute';
 import { useState } from 'react';
 import ShowUserPersonalInfo from './Component/ShowUserPersonalInfo/ShowUserPersonalInfo';
 import VolunteerList from './Component/VolunteerList/VolunteerList';
+import VolunteerEventAdd from './Component/VolunteerEventAdd/VolunteerEventAdd';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const UserContext = createContext();
 
@@ -34,11 +37,21 @@ function App() {
   return (
     <UserContext.Provider value={{ userInfo: [users, setUser], eventInfo: [allEventsInfo, setAllEventsInfo] }}>
       <div className="App-wrapper">
+        <ToastContainer />
         <Router>
           <Switch>
             <Route path="/home" >
               <Header />
             </Route>
+            <Route path="/adminVolunteerList" >
+              <VolunteerList />
+            </Route>
+            <Route path="/adminEventsUpdate" >
+              <VolunteerEventAdd />
+            </Route>
+            <PrivateRoute path="/afterRegister" >
+              <Header />
+            </PrivateRoute>
             <Route path="/admin-panel" >
               <VolunteerList />
             </Route>

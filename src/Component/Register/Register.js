@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { UserContext } from '../../App';
-import './Register.css'
+import './Register.css';
 const Register = () => {
     const { id } = useParams();
     const { userInfo, eventInfo } = useContext(UserContext)
@@ -9,7 +9,7 @@ const Register = () => {
     const [events, setEvent] = useState([])
     let history = useHistory();
     useEffect(() => {
-        fetch('http://localhost:4000/getEvent/' + id)
+        fetch('https://dry-bayou-78136.herokuapp.com/getEvent/' + id)
             .then(res => res.json())
             .then(data => setEvent(data))
     }, [id])
@@ -36,7 +36,7 @@ const Register = () => {
         newUserDetails.descriptions = inputValue.Descriptions;
         newUserDetails.categoryImg = events.img;
         setUser(newUserDetails)
-        fetch('http://localhost:4000/addVolunteer', {
+        fetch('https://dry-bayou-78136.herokuapp.com/addVolunteer', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newUserDetails),
@@ -49,6 +49,7 @@ const Register = () => {
             })
         e.preventDefault();
     }
+
     return (
         <div className="register-wrapper container" >
 
