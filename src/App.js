@@ -16,6 +16,7 @@ import Register from './Component/Register/Register';
 import PrivateRoute from './Component/PrivateRoute/PrivateRoute';
 import { useState } from 'react';
 import ShowUserPersonalInfo from './Component/ShowUserPersonalInfo/ShowUserPersonalInfo';
+import VolunteerList from './Component/VolunteerList/VolunteerList';
 
 export const UserContext = createContext();
 
@@ -37,6 +38,9 @@ function App() {
           <Switch>
             <Route path="/home" >
               <Header />
+            </Route>
+            <Route path="/admin-panel" >
+              <VolunteerList />
             </Route>
             <PrivateRoute path="/event" >
               <ShowUserPersonalInfo />

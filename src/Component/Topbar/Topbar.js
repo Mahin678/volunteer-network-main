@@ -9,6 +9,9 @@ const Topbar = () => {
     const handaleRegister = () => {
         history.push('/afterRegister')
     }
+    const handaleAdmin = () => {
+        history.push('/admin-panel')
+    }
     return (
         <div>
             <nav className="navbar navbar-expand-lg  p-4">
@@ -41,7 +44,7 @@ const Topbar = () => {
                                 :
                                 <>
                                     <button onClick={handaleRegister} className="btn btn-danger mr-4" >Register</button>
-                                    <button className="btn btn-success" >Admin</button>
+                                    <button onClick={handaleAdmin} className="btn btn-success" >Admin</button>
                                 </>
                         }
                     </div>

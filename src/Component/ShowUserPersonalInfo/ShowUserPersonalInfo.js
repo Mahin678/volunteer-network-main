@@ -10,7 +10,7 @@ const ShowUserPersonalInfo = () => {
         fetch('http://localhost:4000/getUserTasks?userEmail=' + users.userEmail)
             .then(res => res.json())
             .then(result => setPreviousInfo(result))
-    }, [users]
+    }, [previousInfo]
     )
     const handaleCancel = (id) => {
         fetch(`http://localhost:4000/CancelEvents/${id}`, {
