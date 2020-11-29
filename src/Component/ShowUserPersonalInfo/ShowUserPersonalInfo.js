@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { UserContext } from '../../App';
 import Topbar from '../Topbar/Topbar';
 import './ShowUserPersonalInfo.css'
@@ -19,6 +20,7 @@ const ShowUserPersonalInfo = () => {
             .then(res => res.json())
             .then(result => {
                 if (result) {
+                    toast.success('successfully cancelled');
                 }
             })
 
@@ -43,7 +45,6 @@ const ShowUserPersonalInfo = () => {
                                 </div>
                             </div>
                         )}
-
                 </div>
             </div>
         </div>

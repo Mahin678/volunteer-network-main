@@ -49,7 +49,7 @@ const Register = () => {
             })
         e.preventDefault();
     }
-
+    document.title = "Register Form";
     return (
         <div className="register-wrapper container" >
 

@@ -37,7 +37,7 @@ const GoogleSignIn = () => {
         });
 
     }
-    console.log(users);
+    document.title = "Google sign in";
     return (
         <div className="SignIn-wrapper text-center " >
             <div className="SignIn-Header text-enter  m-auto " >

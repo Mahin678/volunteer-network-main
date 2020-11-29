@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './VolunteerList.css';
-import { v4 as uuidv4 } from 'uuid';
-import { NavLink, useHistory } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Spinner from '../../Spinner/Spinner';
 
 const VolunteerList = () => {
     const [events, setEvents] = useState({
         placeName: "",
         date: "",
         descriptions: "",
-
     })
     const [manageEvents, setManageEvents] = useState(false)
     const [success, setSuccess] = useState(false)
@@ -22,7 +21,6 @@ const VolunteerList = () => {
     }, [data])
 
     const handleDeleteEvents = (id) => {
-
         fetch(`https://dry-bayou-78136.herokuapp.com/CancelEvents/${id}`, {
             method: 'DELETE'
         })
@@ -33,41 +31,15 @@ const VolunteerList = () => {
                     toast.error('Successfully deleted')
                 }
             })
-
-
     }
-    const handleSubmit = (e) => {
-        fetch('https://dry-bayou-78136.herokuapp.com/addEvents', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(events)
-        }).then(res => res.json())
-            .then(result => setSuccess(result))
-        e.preventDefault();
-    }
-
-    const handleOnBlur = (e) => {
-        let newCategory = { ...events };
-        if (e.target.name == "category") {
-            newCategory.placeName = e.target.value;
-        }
-        else if (e.target.name == "date") {
-            newCategory.date = e.target.value;
-        }
-        else if (e.target.name == "descriptions") {
-            newCategory.descriptions = e.target.value;
-        }
-        else if (e.target.name == "img") {
-            newCategory.img = e.target.value;
-        }
-        newCategory.id = Math.round(Math.random() * 4000 + 1);
-        setEvents(newCategory)
-    }
+    document.title = "Volunteer List";
     return (
         <div className="volunteerList-wrapper " >
             <div className="" >
                 <div className="volunteerHeader p-4 d-flex" >
-                    <img src="https://i.imgur.com/U7HMLBC.png" alt="logo" />
+                    <Link to={'/home'} >
+                        <img src="https://i.imgur.com/U7HMLBC.png" alt="logo" />
+                    </Link>
                     <h4 className="pl-5 ml-5  m-4">Volunteer register list</h4>
                 </div>
             </div>
@@ -103,7 +75,7 @@ const VolunteerList = () => {
                 </div>
                 <div className="w-75 volunteerData d-flex align-items-center">
                     <div className="volunteerData-wrapper w-100" >
-                        <table className="">
+                        <table className="table">
                             <thead>
                                 <tr>
                                     <th scope="col">Name</th>
@@ -114,19 +86,22 @@ const VolunteerList = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {data.map(info =>
-                                    <tr key={info.id}>
-                                        <td>{info.UserName}</td>
-                                        <td>{info.userEmail}</td>
-                                        <td>{info.issuDate}</td>
-                                        <td>{info.category}</td>
-                                        <td className="delete-button">
-                                            <button onClick={() => handleDeleteEvents(info._id)} className='bg-danger ' >
-                                                <img src="https://i.imgur.com/YwDre2M.png" alt="delete-icon" />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                )
+                                {data.length === 0 ? <Spinner /> :
+
+                                    data.map(info =>
+                                        <tr key={info.id}>
+                                            <td className="font-weight-bold" >{info.UserName}</td>
+                                            <td className="text-danger" >{info.userEmail}</td>
+                                            <td>{info.issuDate}</td>
+                                            <td className="text-success font-weight-bold">
+                                                {info.category}</td>
+                                            <td className="delete-button">
+                                                <button onClick={() => handleDeleteEvents(info._id)} className='bg-danger ' >
+                                                    <img src="https://i.imgur.com/YwDre2M.png" alt="delete-icon" />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    )
                                 }
                             </tbody>
                         </table>

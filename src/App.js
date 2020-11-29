@@ -20,6 +20,7 @@ import VolunteerList from './Component/VolunteerList/VolunteerList';
 import VolunteerEventAdd from './Component/VolunteerEventAdd/VolunteerEventAdd';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ConstructionsSite from './Component/ConstructionsSite/ConstructionsSite';
 
 export const UserContext = createContext();
 
@@ -54,6 +55,12 @@ function App() {
             </PrivateRoute>
             <Route path="/admin-panel" >
               <VolunteerList />
+            </Route>
+            <Route path="/donations" >
+              <ConstructionsSite />
+            </Route>
+            <Route path="/blog" >
+              <ConstructionsSite />
             </Route>
             <PrivateRoute path="/event" >
               <ShowUserPersonalInfo />

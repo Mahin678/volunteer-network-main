@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { NavLink, useHistory } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const VolunteerEventAdd = () => {
@@ -9,8 +9,7 @@ const VolunteerEventAdd = () => {
         date: "",
         descriptions: "",
     })
-    const [manageEvents, setManageEvents] = useState(false)
-    const [success, setSuccess] = useState(false)
+
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -27,7 +26,7 @@ const VolunteerEventAdd = () => {
         }).then(res => res.json())
             .then(result => {
                 if (result) {
-                    toast.success('Successfully added Category')
+                    toast.success('Successfully added Category and now go to home for see that ')
                 }
             })
         e.preventDefault();
@@ -54,7 +53,9 @@ const VolunteerEventAdd = () => {
         <div className="volunteerList-wrapper " >
             <div className="" >
                 <div className="volunteerHeader p-4 d-flex" >
-                    <img src="https://i.imgur.com/U7HMLBC.png" alt="logo" />
+                    <Link to={'/home'} >
+                        <img src="https://i.imgur.com/U7HMLBC.png" alt="logo" />
+                    </Link>
                     <h4 className="pl-5 ml-5  m-4">Volunteer register list</h4>
                 </div>
             </div>
@@ -105,7 +106,7 @@ const VolunteerEventAdd = () => {
                                         <div className="title" >
                                             <div className="form-group">
                                                 <label>Date</label>
-                                                <input onBlur={handleOnBlur} name="date" className="form-control w-100" type="date" />
+                                                <input required onBlur={handleOnBlur} name="date" className="form-control w-100" type="date" />
                                             </div>
                                             <div className="form-group">
                                                 <label>Give   img hosteg link</label>
@@ -118,8 +119,6 @@ const VolunteerEventAdd = () => {
                             </form>
                         </>
                     </div>
-
-
                 </div>
             </div>
         </div >

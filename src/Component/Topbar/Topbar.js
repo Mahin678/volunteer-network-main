@@ -17,22 +17,26 @@ const Topbar = () => {
             <nav className="navbar navbar-expand-lg  p-4">
                 <div className="container">
                     <img className="navbar-brand" src="https://i.imgur.com/U7HMLBC.png" />
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="/navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <div className="navbar-collapse" >
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item active">
-                                <NavLink className="nav-link" to="/home">Home <span className="sr-only">(current)</span></NavLink>
+                                <NavLink activeStyle={{
+                                    fontWeight: "bold",
+                                    color: "orange"
+                                }} className="nav-link" to="/home">Home <span className="sr-only">(current)</span></NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/">Donations</NavLink>
+                                <NavLink className="nav-link" to="/donations">Donations</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link " to="/event" >Events</NavLink>
+                                <NavLink activeStyle={{
+                                    fontWeight: "bold",
+                                    color: "orange"
+                                }} className="nav-link " to="/event" >Events</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link " to="/" >Blog</NavLink>
+                                <NavLink className="nav-link " to="/blog" >Blog</NavLink>
                             </li>
                         </ul>
                         {
