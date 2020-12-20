@@ -1,8 +1,14 @@
 .register-wrapper {
-    text-transform: capitalize;
+	text-transform: capitalize;
+	height: 100vh;
 }
 
-.register-wrapper form {  
-    padding: 50px;
-    border:2px solid #dddddd ;
+.register-wrapper form {
+	padding: 50px;
+	border: 2px solid #dddddd;
+}
+.btn-disable {
+	background-color: darkgray;
+	cursor: not-allowed;
+	pointer-events: none;
 }

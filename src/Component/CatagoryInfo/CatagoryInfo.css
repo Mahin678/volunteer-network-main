@@ -4,10 +4,13 @@
 }
 .header-content-img:hover {
 	transition: 0.3s;
-	box-shadow: 0.5rem 1rem 3rem rgba(0, 0, 0, 0.4) !important;
+	box-shadow: 0.5rem 1rem 3rem rgba(0, 0, 0, 0.8) !important;
 }
 .img-headerr {
-	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	width: 200px !important;
+
 	padding: 10px;
 }
 .header-content-img .title {
